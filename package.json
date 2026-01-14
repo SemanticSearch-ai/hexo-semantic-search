@@ -1,7 +1,7 @@
 {
   "name": "hexo-semantic-search",
   "version": "0.1.0",
-  "description": "Semantic search plugin for Hexo powered by SemanticSearch.ai",
+  "description": "Hexo plugin for AI-powered semantic search and related posts. Build a free vector search engine for your blog with Cloudflare Workers.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,15 +13,18 @@
     "semantic-search",
     "ai",
     "vector-search",
-    "related-posts"
+    "related-posts",
+    "cloudflare-workers",
+    "blog-search",
+    "ai-search"
   ],
-  "author": "oldcai",
+  "author": "SemanticSearch.ai",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SemanticSearch-ai/hexo-semantic-search"
+    "url": "git+https://github.com/SemanticSearch-ai/hexo-semantic-search.git"
   },
-  "homepage": "https://github.com/SemanticSearch-ai/hexo-semantic-search#readme",
+  "homepage": "https://semanticsearch.ai",
   "bugs": {
     "url": "https://github.com/SemanticSearch-ai/hexo-semantic-search/issues"
   },
