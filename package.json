@@ -1,0 +1,34 @@
+{
+  "name": "hexo-semantic-search",
+  "version": "0.1.0",
+  "description": "Semantic search plugin for Hexo powered by SemanticSearch.ai",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hexo",
+    "hexo-plugin",
+    "search",
+    "semantic-search",
+    "ai",
+    "vector-search",
+    "related-posts"
+  ],
+  "author": "oldcai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SemanticSearch-ai/hexo-semantic-search"
+  },
+  "homepage": "https://github.com/SemanticSearch-ai/hexo-semantic-search#readme",
+  "bugs": {
+    "url": "https://github.com/SemanticSearch-ai/hexo-semantic-search/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "peerDependencies": {
+    "hexo": ">=5.0.0"
+  }
+}
