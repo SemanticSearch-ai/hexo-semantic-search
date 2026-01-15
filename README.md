@@ -2,6 +2,12 @@
 
 A Hexo plugin that integrates [SemanticSearch](https://github.com/SemanticSearch-ai/semanticsearch) for AI-powered semantic search and related posts.
 
+## Demos
+
+- Related Posts Demo: https://www.oldcai.com/hexo/hexo-semantic-search-ai/
+- Search Demo: https://www.oldcai.com/search/?q=rust%20tutorial
+- Template Example (hexo-theme-cactus): https://github.com/oldcai/hexo-theme-cactus
+
 ## Features
 
 - **Automatic Indexing**: Syncs posts to SemanticSearch after `hexo generate`

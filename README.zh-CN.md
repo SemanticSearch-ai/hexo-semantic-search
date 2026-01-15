@@ -2,6 +2,12 @@
 
 一个 Hexo 插件，集成 [SemanticSearch](https://github.com/SemanticSearch-ai/semanticsearch)，为静态博客提供 AI 语义搜索与相关文章推荐。
 
+## 在线演示
+
+- 相关文章演示：https://www.oldcai.com/hexo/hexo-semantic-search-ai/
+- 搜索演示：https://www.oldcai.com/search/?q=rust%20tutorial
+- 模板示例（hexo-theme-cactus）：https://github.com/oldcai/hexo-theme-cactus
+
 ## 功能特性
 
 - **自动索引**：在 `hexo generate` 后同步文章到 SemanticSearch
