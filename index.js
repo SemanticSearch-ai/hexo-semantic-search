@@ -85,25 +85,48 @@ if (config.enable === false) {
       });
     }
 
-    // Hook: after_post_render - fetch related posts from existing index
+    // Hook: after_post_render - fetch related posts with caching and rate limiting
     // Note: Related posts require posts to already be indexed (from previous builds)
-    // On first build, related posts will be empty; subsequent builds will have them
+    // Uses persistent cache to skip API calls for unchanged posts
     if (relatedEnabled) {
-      hexo.extend.filter.register('before_generate', async function() {
-        relatedManager.clearCache();
-      });
+      // Track pending requests for rate limiting
+      let pendingRequests = 0;
+      const maxConcurrent = 3;
+      const requestQueue = [];
 
-      hexo.extend.filter.register('after_post_render', async function(data) {
-        if (data.layout === 'post' || data.layout === 'page') {
+      const processQueue = async () => {
+        while (requestQueue.length > 0 && pendingRequests < maxConcurrent) {
+          const { post, resolve } = requestQueue.shift();
+          pendingRequests++;
           try {
-            const related = await relatedManager.getRelatedPosts(data);
-            data.semantic_related = related;
+            const related = await relatedManager.getRelatedPostsWithCache(post);
+            post.semantic_related = related;
+            resolve(related);
           } catch (error) {
-            // Silently ignore - related posts may not be available on first build
-            hexo.log.debug(`[SemanticSearch] Related posts: ${error.message}`);
+            resolve([]);
+          } finally {
+            pendingRequests--;
+            processQueue();
           }
         }
+      };
+
+      hexo.extend.filter.register('after_post_render', function(data) {
+        if (data.layout === 'post' || data.layout === 'page') {
+          return new Promise(resolve => {
+            requestQueue.push({
+              post: data,
+              resolve: () => resolve(data)
+            });
+            processQueue();
+          });
+        }
         return data;
+      });
+
+      // Save cache after generation
+      hexo.extend.filter.register('after_generate', function() {
+        relatedManager.saveCache();
       });
     }
 

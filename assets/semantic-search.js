@@ -135,9 +135,11 @@
       var html = '<ul class="semantic-search-result-list">';
       for (var i = 0; i < results.length; i++) {
         var item = results[i];
-        var title = item.metadata?.title || item.title || 'Untitled';
-        var url = item.metadata?.url || item.url || '#';
-        var excerpt = item.metadata?.excerpt || item.excerpt || '';
+        // API returns: { document: { id, text, metadata }, score }
+        var meta = (item.document && item.document.metadata) || item.metadata || {};
+        var title = meta.title || (item.document && item.document.id) || item.title || 'Untitled';
+        var url = meta.url || item.url || '#';
+        var excerpt = meta.excerpt || item.excerpt || '';
 
         html += '<li class="semantic-search-result-item">';
         html += '<a href="' + url + '" class="semantic-search-result-link">' + title + '</a>';
