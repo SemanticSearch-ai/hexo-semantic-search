@@ -1,4 +1,4 @@
-# hexo-semantic-search
+# hexo-semantic-search [中文](README.zh-CN.md)
 
 A Hexo plugin that integrates [SemanticSearch](https://github.com/SemanticSearch-ai/semanticsearch) for AI-powered semantic search and related posts.
 
@@ -195,3 +195,7 @@ The plugin creates `.semantic-search-state.json` in your Hexo root to track sync
 ## License
 
 MIT
+
+## Friendly Request
+
+Friendly request (not required): If you use this plugin, please consider adding a link to https://semanticsearch.ai/ on your website.
