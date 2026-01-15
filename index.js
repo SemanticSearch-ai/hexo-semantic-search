@@ -70,36 +70,27 @@ if (config.enable === false) {
       };
     });
 
-    // Track if sync has been done this build
-    let syncDone = false;
-
     const autoSync = config.sync?.auto !== false;
     const relatedEnabled = (relatedConfig.enable !== false) && readerKey;
 
-    // Hook: before_post_render - sync first, then we can query related posts
-    // This ensures all posts are indexed before we try to find related posts
+    // Hook: after_generate - sync posts after all content is generated
     if (autoSync && writerKey) {
-      hexo.extend.filter.register('before_post_render', async function(data) {
-        // Only sync once per build, on the first post
-        if (!syncDone) {
-          syncDone = true;
-          try {
-            hexo.log.info('[SemanticSearch] Syncing posts before fetching related posts...');
-            await syncManager.sync();
-          } catch (error) {
-            hexo.log.error(`[SemanticSearch] Sync failed: ${error.message}`);
-          }
+      hexo.extend.filter.register('after_generate', async function() {
+        try {
+          hexo.log.info('[SemanticSearch] Syncing posts to index...');
+          await syncManager.sync();
+        } catch (error) {
+          hexo.log.error(`[SemanticSearch] Sync failed: ${error.message}`);
         }
-        return data;
-      }, 1); // Priority 1 = run early
+      });
     }
 
-    // Hook: after_post_render - inject related posts (sync is already done)
+    // Hook: after_post_render - fetch related posts from existing index
+    // Note: Related posts require posts to already be indexed (from previous builds)
+    // On first build, related posts will be empty; subsequent builds will have them
     if (relatedEnabled) {
       hexo.extend.filter.register('before_generate', async function() {
-        // Clear cache and reset sync flag for fresh build
         relatedManager.clearCache();
-        syncDone = false;
       });
 
       hexo.extend.filter.register('after_post_render', async function(data) {
@@ -108,11 +99,12 @@ if (config.enable === false) {
             const related = await relatedManager.getRelatedPosts(data);
             data.semantic_related = related;
           } catch (error) {
-            hexo.log.debug(`[SemanticSearch] Related posts error: ${error.message}`);
+            // Silently ignore - related posts may not be available on first build
+            hexo.log.debug(`[SemanticSearch] Related posts: ${error.message}`);
           }
         }
         return data;
-      }, 10); // Priority 10 = run after sync
+      });
     }
 
     // Command: hexo semantic-search sync
