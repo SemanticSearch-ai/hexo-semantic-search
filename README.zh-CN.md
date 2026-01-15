@@ -1,4 +1,4 @@
-# hexo-semantic-search [English](README.md)
+# hexo-semantic-search-ai [English](README.md)
 
 一个 Hexo 插件，集成 [SemanticSearch](https://github.com/SemanticSearch-ai/semanticsearch)，为静态博客提供 AI 语义搜索与相关文章推荐。
 
@@ -13,7 +13,7 @@
 ## 安装
 
 ```bash
-npm install hexo-semantic-search --save
+npm install hexo-semantic-search-ai --save
 ```
 
 ## 前置条件

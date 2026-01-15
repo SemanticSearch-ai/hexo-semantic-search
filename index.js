@@ -9,7 +9,7 @@ const RelatedPostsManager = require('./lib/related');
 const { registerHelpers } = require('./lib/helpers');
 
 /**
- * hexo-semantic-search
+ * hexo-semantic-search-ai
  *
  * A Hexo plugin that integrates SemanticSearch for:
  * - Automatic post indexing with incremental sync

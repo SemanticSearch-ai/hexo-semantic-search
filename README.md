@@ -1,4 +1,4 @@
-# hexo-semantic-search [中文](README.zh-CN.md)
+# hexo-semantic-search-ai [中文](README.zh-CN.md)
 
 A Hexo plugin that integrates [SemanticSearch](https://github.com/SemanticSearch-ai/semanticsearch) for AI-powered semantic search and related posts.
 
@@ -13,7 +13,7 @@ A Hexo plugin that integrates [SemanticSearch](https://github.com/SemanticSearch
 ## Installation
 
 ```bash
-npm install hexo-semantic-search --save
+npm install hexo-semantic-search-ai --save
 ```
 
 ## Prerequisites
